@@ -16,6 +16,7 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+database.json
 
 # --- Debug / Logs ---
 npm-debug.log*
@@ -29,7 +30,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # --- Database (SQLite) ---
-# Vì anh có dùng sqlite3, nên tránh đẩy file db local lên
 *.db
 *.sqlite
 *.sqlite3
