@@ -1,3 +1,5 @@
+import { sequelize } from "@configs/database";
+import { User } from "@models/user.model";
 import { Request, Response } from "express";
 
 export class DevController {
@@ -13,9 +15,21 @@ export class DevController {
   edit(req: Request, res: Response) {
     res.send(`Edit Dev ${req.params.id}`);
   }
-  create(req: Request, res: Response) {
-    res.send("Create Dev");
+
+  async create(req: Request, res: Response) {
+    try {
+      const user = await User(sequelize).create({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+      });
+
+      return res.json(user);
+    } catch (error: any) {
+      return res.status(500).json({ error: error.message });
+    }
   }
+
   update(req: Request, res: Response) {
     res.send(`Update Dev ${req.params.id}`);
   }
