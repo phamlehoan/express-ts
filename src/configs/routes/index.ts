@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { homeController, devController } from '@controllers';
-import { resource } from '../../lib/resource';
+import { homeController } from '@controllers';
+import apiRouter from './api';
 
 const path = Router();
 
 path.get('/', homeController.index);
-resource(path, 'dev', devController);
+path.use('/api', apiRouter);
 
 export default path;

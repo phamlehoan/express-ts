@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import { syncDb } from '@models';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -35,6 +36,11 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', routes);
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+const startServer = async () => {
+  await syncDb();
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+};
+
+startServer();
